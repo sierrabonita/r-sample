@@ -1,9 +1,20 @@
 {
-    "version": "0.2",
-    "ignorePaths": [],
-    "dictionaryDefinitions": [],
-    "dictionaries": [],
-    "words": ["evenodd", "iconify", "labelledby", "linecap", "linejoin", "oxlint", "oxlintrc", "tsgolint", "vite", "xlink"],
-    "ignoreWords": [],
-    "import": []
+  "version": "0.2",
+  "ignorePaths": [],
+  "dictionaryDefinitions": [],
+  "dictionaries": [],
+  "words": [
+    "evenodd",
+    "iconify",
+    "labelledby",
+    "linecap",
+    "linejoin",
+    "oxlint",
+    "oxlintrc",
+    "tsgolint",
+    "vite",
+    "xlink"
+  ],
+  "ignoreWords": [],
+  "import": []
 }
