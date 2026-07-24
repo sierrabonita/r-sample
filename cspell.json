@@ -1,9 +1,15 @@
 {
   "version": "0.2",
-  "ignorePaths": [],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "pnpm-lock.yaml",
+    ".git"
+  ],
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
+    "chakra",
     "eabi",
     "evenodd",
     "fdir",
