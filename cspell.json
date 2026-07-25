@@ -1,11 +1,6 @@
 {
   "version": "0.2",
-  "ignorePaths": [
-    "node_modules",
-    "dist",
-    "pnpm-lock.yaml",
-    ".git"
-  ],
+  "ignorePaths": ["node_modules", "dist", "pnpm-lock.yaml", ".git"],
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
