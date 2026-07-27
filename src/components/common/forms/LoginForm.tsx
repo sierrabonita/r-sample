@@ -64,11 +64,10 @@ const LoginForm = ({ setDialogType }: LoginFormProps) => {
         type: 'success',
       });
 
-      // TODO: リンク修正
       if (result.data.login.user.role === 1) {
-        navigate({ to: '/' });
+        navigate({ to: '/admin' });
       } else {
-        navigate({ to: '/' });
+        navigate({ to: '/home' });
       }
     }
   };
