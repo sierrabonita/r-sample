@@ -1,13 +1,9 @@
 import { Box, Table, Text } from '@chakra-ui/react';
 import { IoOptions } from 'react-icons/io5';
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  role: number;
-  createdAt: string;
-};
+import { useState } from 'react';
+import SimpleDialog from '@/components/common/dialogs/SimpleDialog';
+import { UpdateUserRoleForm } from '@/components/common/forms/UpdateUserRoleForm';
+import type { User } from '@/schemas/user';
 
 const getRoleLabel = (role: number) => {
   switch (role) {
@@ -21,6 +17,22 @@ const getRoleLabel = (role: number) => {
 };
 
 export const UserTable = ({ users }: { users: User[] }) => {
+  const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const handleOnClick = (user: User) => {
+    setSelectedUser(user);
+    setIsOpenEditDialog(true);
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpenEditDialog(open);
+    if (!open) {
+      setSelectedUser(null);
+      setIsOpenEditDialog(false);
+    }
+  };
+
   return (
     <>
       <Table.Root>
@@ -42,7 +54,7 @@ export const UserTable = ({ users }: { users: User[] }) => {
                 <Table.Cell>{getRoleLabel(user.role)}</Table.Cell>
                 <Table.Cell>{user.createdAt}</Table.Cell>
                 <Table.Cell>
-                  <Box cursor="pointer" onClick={() => {}}>
+                  <Box cursor="pointer" onClick={() => handleOnClick(user)}>
                     <IoOptions />
                   </Box>
                 </Table.Cell>
@@ -53,6 +65,14 @@ export const UserTable = ({ users }: { users: User[] }) => {
           )}
         </Table.Body>
       </Table.Root>
+      <SimpleDialog isOpen={isOpenEditDialog} onOpenChange={handleOpenChange}>
+        {selectedUser && (
+          <UpdateUserRoleForm
+            user={{ id: selectedUser.id, role: selectedUser.role }}
+            onSuccess={() => handleOpenChange(false)}
+          />
+        )}
+      </SimpleDialog>
     </>
   );
 };
