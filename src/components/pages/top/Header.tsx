@@ -2,9 +2,9 @@ import { BiSolidCameraMovie } from 'react-icons/bi';
 import { useState } from 'react';
 import { Heading, HStack } from '@chakra-ui/react';
 import { TextButton } from '@/components/common/buttons/TextButton';
-import SimpleDialog from '@/components/common/dialogs/SimpleDialog';
-import LoginForm from '@/components/common/forms/LoginForm';
-import SignUpEmailForm from '@/components/common/forms/SignUpEmailForm';
+import { SimpleDialog } from '@/components/common/dialogs/SimpleDialog';
+import { LoginForm } from '@/components/common/forms/LoginForm';
+import { SignUpEmailForm } from '@/components/common/forms/SignUpEmailForm';
 
 type DialogType = 'signup' | 'login' | null;
 

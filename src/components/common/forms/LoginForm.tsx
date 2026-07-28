@@ -19,7 +19,7 @@ type LoginFormProps = {
   setDialogType: (type: 'signup' | 'login' | null) => void;
 };
 
-const LoginForm = ({ setDialogType }: LoginFormProps) => {
+export const LoginForm = ({ setDialogType }: LoginFormProps) => {
   const navigate = useNavigate();
   const {
     register,
@@ -108,5 +108,3 @@ const LoginForm = ({ setDialogType }: LoginFormProps) => {
     </Stack>
   );
 };
-
-export default LoginForm;

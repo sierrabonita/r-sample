@@ -1,7 +1,7 @@
 import { Heading, Stack, Flex } from '@chakra-ui/react';
 import { TextButton } from '@/components/common/buttons/TextButton';
 
-const SignUpEmailForm = ({
+export const SignUpEmailForm = ({
   setDialogType,
 }: {
   setDialogType: (type: 'signup' | 'login' | null) => void;
@@ -17,5 +17,3 @@ const SignUpEmailForm = ({
     </Stack>
   );
 };
-
-export default SignUpEmailForm;
