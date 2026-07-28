@@ -5,15 +5,7 @@ import { TextButton } from '@/components/common/buttons/TextButton';
 import { toaster } from '@/components/ui/toaster';
 import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
-
-import { z } from 'zod';
-
-export const loginSchema = z.object({
-  email: z.email({ message: '無効なメールアドレス形式です' }),
-  password: z.string().min(1, { message: 'パスワードを入力してください' }),
-});
-
-export type LoginDto = z.infer<typeof loginSchema>;
+import { type LoginDto, loginSchema } from '@/schemas/auth';
 
 type LoginFormProps = {
   setDialogType: (type: 'signup' | 'login' | null) => void;
