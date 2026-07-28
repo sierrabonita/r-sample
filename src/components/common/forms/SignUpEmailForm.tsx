@@ -1,11 +1,12 @@
 import { Heading, Stack, Flex } from '@chakra-ui/react';
 import { TextButton } from '@/components/common/buttons/TextButton';
+import type { DialogInHeaderType } from '@/types/dialogs';
 
-export const SignUpEmailForm = ({
-  setDialogType,
-}: {
-  setDialogType: (type: 'signup' | 'login' | null) => void;
-}) => {
+type Props = {
+  setDialogType: (type: DialogInHeaderType | null) => void;
+};
+
+export const SignUpEmailForm = ({ setDialogType }: Props) => {
   return (
     <Stack p={8} gap={6}>
       <Heading size="xl" textAlign="center">

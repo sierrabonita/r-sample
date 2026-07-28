@@ -5,11 +5,10 @@ import { TextButton } from '@/components/common/buttons/TextButton';
 import { SimpleDialog } from '@/components/common/dialogs/SimpleDialog';
 import { LoginForm } from '@/components/common/forms/LoginForm';
 import { SignUpEmailForm } from '@/components/common/forms/SignUpEmailForm';
-
-type DialogType = 'signup' | 'login' | null;
+import type { DialogInHeaderType } from '@/types/dialogs';
 
 export const Header = () => {
-  const [dialogType, setDialogType] = useState<DialogType>(null);
+  const [dialogType, setDialogType] = useState<DialogInHeaderType | null>(null);
   const isDialogOpen = dialogType !== null;
   const handleOpenChange = (open: boolean) => {
     if (!open) {

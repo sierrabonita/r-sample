@@ -6,12 +6,13 @@ import { toaster } from '@/components/ui/toaster';
 import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
 import { type LoginDto, loginSchema } from '@/schemas/auth';
+import type { DialogInHeaderType } from '@/types/dialogs';
 
-type LoginFormProps = {
-  setDialogType: (type: 'signup' | 'login' | null) => void;
+type Props = {
+  setDialogType: (type: DialogInHeaderType | null) => void;
 };
 
-export const LoginForm = ({ setDialogType }: LoginFormProps) => {
+export const LoginForm = ({ setDialogType }: Props) => {
   const navigate = useNavigate();
   const {
     register,
