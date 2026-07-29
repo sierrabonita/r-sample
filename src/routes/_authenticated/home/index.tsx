@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Box, Center, HStack, Heading, List, Spinner, Text } from '@chakra-ui/react';
 
-export const Route = createFileRoute('/home/')({
+export const Route = createFileRoute('/_authenticated/home/')({
   component: Home,
 });
 

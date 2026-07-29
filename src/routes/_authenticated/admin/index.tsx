@@ -3,7 +3,7 @@ import { Center, Container, Heading, Spinner } from '@chakra-ui/react';
 import { UserTable } from '@/components/pages/admin/UserTable';
 import type { User } from '@/schemas/user';
 
-export const Route = createFileRoute('/admin/')({
+export const Route = createFileRoute('/_authenticated/admin/')({
   component: Admin,
 });
 
