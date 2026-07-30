@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Box, Flex } from '@chakra-ui/react';
 import { AuthHeader } from '@/components/common/headers/AuthHeader';
+import { Toaster } from '@/components/ui/toaster';
 
 export const Route = createFileRoute('/_authenticated')({
   component: AuthenticatedLayout,
@@ -13,6 +14,7 @@ function AuthenticatedLayout() {
       <Box as="main" flex="1" p="8">
         <Outlet />
       </Box>
+      <Toaster />
     </Flex>
   );
 }
