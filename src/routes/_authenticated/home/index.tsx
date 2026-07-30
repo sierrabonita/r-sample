@@ -40,17 +40,15 @@ function Home() {
       <Heading mb={4}>レビュー履歴</Heading>
       <List.Root>
         {reviews.map((review) => (
-          <>
-            <List.Item pb="1rem" listStyle="none">
-              <HStack justifyContent="start">
-                <Text fontSize="xs">{review.createdAt}</Text>
-                <Text fontWeight="bold" fontSize="md">
-                  {review.movie.title}
-                </Text>
-                <Text>{review.content}</Text>
-              </HStack>
-            </List.Item>
-          </>
+          <List.Item key={review.id} pb="1rem" listStyle="none">
+            <HStack justifyContent="start">
+              <Text fontSize="xs">{review.createdAt}</Text>
+              <Text fontWeight="bold" fontSize="md">
+                {review.movie.title}
+              </Text>
+              <Text>{review.content}</Text>
+            </HStack>
+          </List.Item>
         ))}
       </List.Root>
     </Box>
