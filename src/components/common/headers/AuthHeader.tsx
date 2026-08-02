@@ -1,11 +1,31 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { Badge, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { USER_ROLES } from '@/types/roles';
+import { useState } from 'react';
+import { ConfirmDialog } from '../dialogs/ConfirmDialog';
 
 export const AuthHeader = () => {
   // ダミー
   const data = { name: 'test', role: USER_ROLES.ADMIN };
   const fetching = false;
+
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClickAccept = async () => {
+    try {
+      setIsLoggingOut(true);
+
+      // await executeMutation({});
+      navigate({ to: '/' });
+    } catch (error) {
+      // oxlint-disable-next-line no-console
+      console.error('ログアウト中にエラーが発生しました:', error);
+      setIsLoggingOut(false);
+    }
+  };
 
   const isAdmin = data.role === USER_ROLES.ADMIN;
 
@@ -53,11 +73,19 @@ export const AuthHeader = () => {
             </Text>
           )}
 
-          <Button onClick={() => {}} variant="outline">
+          <Button onClick={() => setIsOpenDialog(true)} variant="outline">
             ログアウト
           </Button>
         </Flex>
       </Flex>
+      <ConfirmDialog
+        body={'ログアウトします。よろしいですか？'}
+        title={'ログアウト確認'}
+        isOpen={isOpenDialog}
+        isLoading={isLoggingOut}
+        onClickConfirm={handleClickAccept}
+        onOpenChange={setIsOpenDialog}
+      />
     </>
   );
 };
