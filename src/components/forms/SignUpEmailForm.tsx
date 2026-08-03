@@ -1,5 +1,5 @@
 import { Heading, Stack, Flex } from '@chakra-ui/react';
-import { TextButton } from '@/components/common/buttons/TextButton';
+import { TextButton } from '@/components/buttons/TextButton';
 import type { DialogInHeaderType } from '@/types/dialogs';
 
 type Props = {

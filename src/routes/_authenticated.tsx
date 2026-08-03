@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Box, Flex } from '@chakra-ui/react';
-import { AuthHeader } from '@/components/common/headers/AuthHeader';
+import { AuthHeader } from '@/components/headers/AuthHeader';
 import { Toaster } from '@/libs/chakra/toaster';
 
 export const Route = createFileRoute('/_authenticated')({

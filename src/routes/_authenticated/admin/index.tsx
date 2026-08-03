@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Center, Container, Heading, Spinner } from '@chakra-ui/react';
-import { UserTable } from '@/components/pages/admin/UserTable';
+import { UserTable } from '@/components/tables/UserTable';
 import type { User } from '@/schemas/user';
 
 export const Route = createFileRoute('/_authenticated/admin/')({

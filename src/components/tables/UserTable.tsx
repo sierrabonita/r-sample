@@ -1,8 +1,8 @@
 import { Box, Table, Text } from '@chakra-ui/react';
 import { IoOptions } from 'react-icons/io5';
 import { useState } from 'react';
-import { SimpleDialog } from '@/components/common/dialogs/SimpleDialog';
-import { UpdateUserRoleForm } from '@/components/common/forms/UpdateUserRoleForm';
+import { SimpleDialog } from '@/components/dialogs/SimpleDialog';
+import { UpdateUserRoleForm } from '@/components/forms/UpdateUserRoleForm';
 import type { User } from '@/schemas/user';
 
 const getRoleLabel = (role: number) => {

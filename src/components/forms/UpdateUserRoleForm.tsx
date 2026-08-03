@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Box, Button, Heading, NativeSelect, Stack } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
 import { toaster } from '@/libs/chakra/toaster';
-import { FormField } from '@/components/common/forms/FormField';
+import { FormField } from '@/components/forms/FormField';
 import { USER_ROLES } from '@/types/roles';
 import { type UpdateUserRoleDto, updateUserRoleSchema } from '@/schemas/user';
 

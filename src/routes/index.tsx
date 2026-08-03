@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Container } from '@chakra-ui/react';
-import { Header } from '@/components/pages/top/Header';
-import { ReviewList } from '@/components/pages/top/ReviewList';
+import { Header } from '@/components/headers/Header';
+import { ReviewList } from '@/components/lists/ReviewList';
 
 export const Route = createFileRoute('/')({
   component: Top,

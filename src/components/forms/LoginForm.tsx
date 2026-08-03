@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { FormField } from '@/components/common/forms/FormField';
-import { TextButton } from '@/components/common/buttons/TextButton';
+import { FormField } from '@/components/forms/FormField';
+import { TextButton } from '@/components/buttons/TextButton';
 import { toaster } from '@/libs/chakra/toaster';
 import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
