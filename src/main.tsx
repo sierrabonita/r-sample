@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Provider } from '@/libs/chakra/provider';
+import { Provider as ChakraProvider } from '@/libs/chakra/provider';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
 
@@ -18,9 +18,9 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Provider>
+      <ChakraProvider>
         <RouterProvider router={router} />
-      </Provider>
+      </ChakraProvider>
     </QueryClientProvider>
   </StrictMode>,
 );
