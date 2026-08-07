@@ -3,22 +3,21 @@ import { Badge, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { USER_ROLES } from '@/types/roles';
 import { useState } from 'react';
 import { ConfirmDialog } from '../dialogs/ConfirmDialog';
+import { useAuthUser, useLogout } from '@/usecases/useAuth';
 
 export const AuthHeader = () => {
-  // ダミー
-  const data = { name: 'test', role: USER_ROLES.ADMIN };
-  const fetching = false;
+  const { data: user, isLoading } = useAuthUser();
+  const { mutateAsync: logout } = useLogout();
+  const navigate = useNavigate();
 
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleClickAccept = async () => {
     try {
       setIsLoggingOut(true);
 
-      // await executeMutation({});
+      await logout();
       navigate({ to: '/' });
     } catch (error) {
       // oxlint-disable-next-line no-console
@@ -27,7 +26,7 @@ export const AuthHeader = () => {
     }
   };
 
-  const isAdmin = data.role === USER_ROLES.ADMIN;
+  const isAdmin = user?.role === USER_ROLES.ADMIN;
 
   return (
     <>
@@ -67,9 +66,9 @@ export const AuthHeader = () => {
         </Flex>
 
         <Flex alignItems="center" gap={6}>
-          {!fetching && data && (
+          {!isLoading && user && (
             <Text fontSize="sm" color="gray.800">
-              {data.name}さん
+              {user.name}さん
             </Text>
           )}
 

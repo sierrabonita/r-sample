@@ -7,6 +7,7 @@ import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
 import { type LoginDto, loginSchema } from '@/schemas/auth';
 import type { DialogInHeaderType } from '@/types/dialogs';
+import { useLogin } from '@/usecases/useAuth';
 
 type Props = {
   setDialogType: (type: DialogInHeaderType | null) => void;
@@ -14,6 +15,8 @@ type Props = {
 
 export const LoginForm = ({ setDialogType }: Props) => {
   const navigate = useNavigate();
+  const { mutateAsync: login, error } = useLogin();
+
   const {
     register,
     handleSubmit,
@@ -27,41 +30,30 @@ export const LoginForm = ({ setDialogType }: Props) => {
   });
 
   const onSubmit = async (data: LoginDto) => {
-    // TODO: API連携(下記はGraphQLを想定)
-    // const result = await executeMutation({
-    //   input: {
-    //     email: data.email,
-    //     password: data.password,
-    //   },
-    // });
+    const result = await login(data);
 
     // oxlint-disable-next-line no-console
-    console.log('data: ', data);
+    console.log('result: ', result);
 
-    // ダミーデータ
-    const result = { data: { login: { user: { name: 'test', role: 0 } } } };
-
-    // if (result.error) {
-    //   toaster.create({
-    //     title: 'ログイン失敗',
-    //     description: result.error.message,
-    //     type: 'error',
-    //   });
-    //   return;
-    // }
-
-    if (result.data?.login) {
+    if (error) {
       toaster.create({
-        title: 'ログイン成功',
-        description: `${result.data.login.user.name}さん、ようこそ！`,
-        type: 'success',
+        title: 'ログイン失敗',
+        description: error.message,
+        type: 'error',
       });
+      return;
+    }
 
-      if (result.data.login.user.role === 1) {
-        navigate({ to: '/admin' });
-      } else {
-        navigate({ to: '/home' });
-      }
+    toaster.create({
+      title: 'ログイン成功',
+      description: `${result.name}さん、ようこそ！`,
+      type: 'success',
+    });
+
+    if (result.role === 1) {
+      navigate({ to: '/admin' });
+    } else {
+      navigate({ to: '/home' });
     }
   };
 
