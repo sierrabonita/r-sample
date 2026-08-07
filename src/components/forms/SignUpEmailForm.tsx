@@ -1,5 +1,4 @@
-import { USER_ROLES } from '@/types/roles';
-import { type CreateUserDto, createUserSchema } from '@/schemas/user';
+import { type SendVerificationEmailFormDto, sendVerificationEmailFormSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,62 +7,49 @@ import { TextButton } from '@/components/buttons/TextButton';
 import { FormField } from '@/components/forms/FormField';
 import { toaster } from '@/libs/chakra/toaster';
 import { Box, Button, Center, Flex, Heading, Input, Stack, Text } from '@chakra-ui/react';
+import { useSendVerificationEmail } from '@/usecases/useAuth';
 
 type Props = {
   setDialogType: (type: 'login' | 'signup' | null) => void;
 };
 
 export const SignUpEmailForm = ({ setDialogType }: Props) => {
+  const { mutateAsync: sendVerificationEmail, error } = useSendVerificationEmail();
   const [isSent, setIsSent] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     getValues,
-  } = useForm<CreateUserDto>({
+  } = useForm<SendVerificationEmailFormDto>({
+    mode: 'onChange',
     defaultValues: {
       email: '',
-      password: '',
-      name: '',
-      role: USER_ROLES.NORMAL,
+      emailConfirm: '',
     },
-    resolver: zodResolver(createUserSchema),
+    resolver: zodResolver(sendVerificationEmailFormSchema),
   });
 
-  const onSubmit = async (data: CreateUserDto) => {
-    // const result = await executeMutation({
-    //   input: {
-    //     email: data.email,
-    //     password: data.password,
-    //     name: data.name,
-    //     role: data.role,
-    //   },
-    // });
+  const onSubmit = async (data: SendVerificationEmailFormDto) => {
+    await sendVerificationEmail(data);
 
-    // oxlint-disable-next-line no-console
-    console.log('data: ', data);
-
-    // ダミー
-    const result = { data: { sendVerificationEmail: true } };
-
-    // if (result.error) {
-    //   toaster.create({
-    //     title: '登録メール送信失敗',
-    //     description: result.error.message,
-    //     type: 'error',
-    //   });
-    //   return;
-    // }
-
-    if (result.data?.sendVerificationEmail) {
-      setIsSent(true);
+    if (error) {
       toaster.create({
-        title: '認証メール送信完了',
-        description: '入力されたメールアドレスに登録案内を送信しました。',
-        type: 'success',
+        title: '登録メール送信失敗',
+        description: error.message,
+        type: 'error',
       });
+      return;
     }
+
+    setIsSent(true);
+
+    toaster.create({
+      title: '認証メール送信完了',
+      description: '入力されたメールアドレスに登録案内を送信しました。',
+      type: 'success',
+    });
   };
 
   if (isSent) {
@@ -93,10 +79,6 @@ export const SignUpEmailForm = ({ setDialogType }: Props) => {
 
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack gap={4}>
-          <FormField label="名前" invalid={!!errors.name} errorText={errors.name?.message}>
-            <Input placeholder="名前を入力" {...register('name')} />
-          </FormField>
-
           <FormField
             label="メールアドレス"
             invalid={!!errors.email}
@@ -106,14 +88,21 @@ export const SignUpEmailForm = ({ setDialogType }: Props) => {
           </FormField>
 
           <FormField
-            label="パスワード"
-            invalid={!!errors.password}
-            errorText={errors.password?.message}
+            label="メールアドレス（確認用）"
+            invalid={!!errors.emailConfirm}
+            errorText={errors.emailConfirm?.message}
           >
-            <Input type="password" placeholder="パスワードを入力" {...register('password')} />
+            <Input type="email" placeholder="もう一度入力" {...register('emailConfirm')} />
           </FormField>
 
-          <Button type="submit" colorScheme="blue" width="full" mt={4} loading={isSubmitting}>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            width="full"
+            mt={4}
+            loading={isSubmitting}
+            disabled={!isValid}
+          >
             新規登録する
           </Button>
         </Stack>

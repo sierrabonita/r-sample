@@ -1,4 +1,4 @@
-import type { LoginDto } from '@/schemas/auth';
+import type { LoginDto, SendVerificationEmailDto } from '@/schemas/auth';
 import type { User } from '@/schemas/user';
 import { USER_ROLES } from '@/types/roles';
 
@@ -40,6 +40,17 @@ export const authRepository = {
   logout: async (): Promise<void> => {
     return new Promise((resolve) => {
       setTimeout(resolve, 300);
+    });
+  },
+
+  // ダミー仮登録
+  sendVerificationEmail: async (props: SendVerificationEmailDto): Promise<{ email: string }> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          email: props.email,
+        });
+      }, 500);
     });
   },
 };

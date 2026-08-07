@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { authRepository } from '@/repositories/authRepository';
-import type { LoginDto } from '@/schemas/auth';
+import type { LoginDto, SendVerificationEmailDto } from '@/schemas/auth';
 import type { User } from '@/schemas/user';
 
 const AUTH_USER_KEY = ['authUser'];
@@ -38,5 +38,11 @@ export const useLogout = () => {
       // キャッシュをクリアして未ログイン状態にする
       queryClient.setQueryData(AUTH_USER_KEY, null);
     },
+  });
+};
+
+export const useSendVerificationEmail = () => {
+  return useMutation({
+    mutationFn: (data: SendVerificationEmailDto) => authRepository.sendVerificationEmail(data),
   });
 };
